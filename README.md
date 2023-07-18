@@ -1,5 +1,5 @@
 # SplitRight
-SplitRight is an app that offers you the easiest ways to divide expenses between friends or family members and minimize the level of stress about who owes who. Split bill applications like Splitwise help you monitor, manage, and share expenses with coworkers without having to juggle paperwork and stress-full calculations. 
+SplitRight is an app that offers you the easiest ways to divide expenses between friends or family members and minimize the level of stress about who owes who. Split bill applications like SplitRight help you monitor, manage, and share expenses with coworkers without having to juggle paperwork and stress-full calculations. 
 
 ## Tech-stack 
 
