@@ -49,10 +49,10 @@ Here is my ideal roadmap & features checklist for completing this project in a m
 
 
 - [ ] 
-    - [X] User Login
-    - [X] In-App Calculator
-    - [X] Add Bank Details
-    - [X] App Wallet
+    - [] User Login
+    - [] In-App Calculator
+    - [] Add Bank Details
+    - [] App Wallet
     - [ ] Notification
     - [ ] OCR System-> automatically read bills, saving time for users and cutting down the hassle of manual calculations
     - [ ] Authentication and Security
