@@ -1,0 +1,4 @@
+{
+    "MONGODB_DATABASE_NAME": "splitright",
+    "MONGODB_CONNECTION_URI": "mongodb://localhost:27017/"
+}

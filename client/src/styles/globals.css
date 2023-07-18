@@ -1,107 +1,131 @@
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
+body{
+  margin:0;
+  font-family: 'Open Sans', sans-serif;
+}
+.container{
+  max-width: calc(1140px);
+  margin: auto;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
+/* HEADER CSS STARTS */
+header{
+  background-color: #fff;
+  padding: 10px 0;
+  color:#000;
+  top: 0;
+  width: 100%
 }
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+nav{
+  display: flex;
 }
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+.logo{
+  display: flex;
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
 }
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.logo img{
+  max-width: 250px;
+  height: 100px;
 }
-
-a {
-  color: inherit;
+ul.nav-menus{
+  display: flex;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+    justify-self: flex-end;
+    -webkit-box-pack: end;
+    list-style: none;
+    font-size: 1.2rem;
+    
+}
+ul.nav-menus li{
+  align-self: center;
+  padding: 0 10px;
+  margin-bottom: 0;
+}
+ul.nav-menus li a{
+  color:#000;
   text-decoration: none;
+  font-weight: 500;
+  line-height: 16px;
+  border-radius: 30px;
+  padding: 10px 12px;
+  white-space: nowrap;
+}
+ul.nav-menus li a.active,
+ul.nav-menus li a:hover{
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
+}
+/* HEADER CSS ENDS */
+
+/*  */
+/* BANNER CSS STARTS */
+.hero{
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+}
+.request--box{
+  background-color: #fff;
+    padding: 20px 40px;
+    color: #000;
+    position: absolute;
+    top: 30%;
+    bottom: auto;
+    left: 12%;
+}
+.request--box h2{
+  font-size: 3rem;
+  font-weight: 500;
+}
+.request--box .btn{
+  margin-bottom: 20px;
+  display: flex;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+form input{
+  display: block;
+  margin:15px 0;
+	padding:15px 10px;
+	width:100%;
+	outline:none;
+	border:1px solid #bbb;
+	border-radius:20px;
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+    -webkit-transition:0.2s ease all;
+	   -moz-transition:0.2s ease all;
+	    -ms-transition:0.2s ease all;
+	     -o-transition:0.2s ease all;
+	        transition:0.2s ease all;
+}
+.request--box a,
+button[type="submit"]{
+  background-color: #000;
+  padding: 14px 25px;
+  color:#fff;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.request--box a:hover,
+button[type="submit"]:hover{
+  opacity: 0.5;
+}
+/* BANNER CSS ENDS */
+/*  */
+
+/* LOGIN PAGE CSS STARTS */
+.app--login{
+  max-width: 400px;
+  margin:0 auto;
+}
+.app--login input + div{
+  color:red;
 }

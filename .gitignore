@@ -27,6 +27,7 @@ coverage
 build/Release
 
 # Dependency directories
+**/.env
 **/node_modules
 server/node_modules
 server/node_modules
