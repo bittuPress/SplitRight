@@ -51,6 +51,7 @@ Here is my ideal roadmap & features checklist for completing this project in a m
 - [ ] 
     - [ ] User Login
     - [ ] In-App Calculator
+    - [ ] Search friends, transactions, groups
     - [ ] Add Bank Details
     - [ ] App Wallet
     - [ ] Notification

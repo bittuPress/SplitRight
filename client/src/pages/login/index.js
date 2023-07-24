@@ -1,5 +1,6 @@
 import React from 'react'
 import { Formik, Form, Field } from 'formik';
+import Link from 'next/link';
 import * as Yup from 'yup';
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
@@ -35,7 +36,7 @@ const Login = () => {
            </Form>
          )}
        </Formik>
-        <p>Don't have an account? <a href="/register">Sign up</a></p>
+        <p>Don't have an account? <Link href="/register">Sign up</Link></p>
       </div>
       </div>
       <Footer/>
