@@ -2,8 +2,8 @@ import React from 'react'
 import { Formik, Form, Field } from 'formik';
 import Link from 'next/link';
 import * as Yup from 'yup';
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 const Login = () => {
     const LoginSchema = Yup.object().shape({
       email: Yup.string().email('Invalid email').required('Required'),

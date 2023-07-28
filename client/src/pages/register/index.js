@@ -4,8 +4,8 @@ import { Button, message, Space } from 'antd';
 import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 import * as Yup from 'yup';
-import Header from '../../components/Header'
-import Footer from '../../components/Footer'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 const Register = () => {
   const [messageApi, contextHolder] = message.useMessage()
   const router = useRouter()
@@ -27,7 +27,6 @@ const Register = () => {
       //function to create new user
       const handleRegister = async(values) =>{
         const {confirmPassword, ...formFields} = values
-        
         const requestOptions = {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -35,14 +34,17 @@ const Register = () => {
         };
         const res = await fetch('http://localhost:4000/register', requestOptions)
         const data = await res.json()
-        
-        if(data){
+        if(data.success){
           messageApi.open({
             type: 'success',
             content: data.msg
           });
           setTimeout(router.push('/login'), 4000);
-          
+        }else{
+          messageApi.open({
+            type: 'error',
+            content: data.msg
+          });
         }
       }
     return(
