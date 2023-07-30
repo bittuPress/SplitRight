@@ -12,7 +12,7 @@ const userSlice = createSlice({
       setUserDetails(state,actions) {
         // debugger;
         const {token, userDetails} = actions.payload
-        return{
+        return{//adding token & userdetails on existing state
           ...state,
           token,
           userDetails,

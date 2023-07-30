@@ -55,13 +55,13 @@ Here is my ideal roadmap & features checklist for completing this project in a m
     - [ ] Involved users can also modify the entries
     - [ ] All action logs will be recorded
     - [ ] Users will see the financial status with their friends
-    - [ ] OCR System-> automatically read bills, saving time for users and cutting down the hassle of manual calculations
     - [ ] Able to see the unsettled expenses, settle the payment through cash record or pay with PayPal and finalaize by author
     - [ ] Send Invite through Email or PhoneNumber
     - [ ] Can create groups and manage bills on group level
     - [ ] User can search the transactions with keyword or date added.
     - [ ] User can see the transactions he owe to his friends or friends who owe the user
     - [ ] User should be notified through Email for each action
+    - [ ] OCR System-> automatically read bills, saving time for users and cutting down the hassle of manual calculations
 
 
 
