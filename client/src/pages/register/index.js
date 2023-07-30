@@ -6,7 +6,10 @@ import Link from 'next/link';
 import * as Yup from 'yup';
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { setUserDetails } from '@/redux/reducerSlice/Users';
+import { useDispatch } from 'react-redux';
 const Register = () => {
+  const dispatch = useDispatch()
   const [messageApi, contextHolder] = message.useMessage()
   const router = useRouter()
     const SignupSchema = Yup.object().shape({
@@ -35,6 +38,8 @@ const Register = () => {
         const res = await fetch('http://localhost:4000/register', requestOptions)
         const data = await res.json()
         if(data.success){
+          // debugger;
+          dispatch(setUserDetails(data))
           messageApi.open({
             type: 'success',
             content: data.msg
