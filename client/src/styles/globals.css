@@ -3,7 +3,7 @@ body{
   font-family: 'Open Sans', sans-serif;
 }
 .container{
-  max-width: calc(1140px);
+  max-width: calc(800px);
   margin: auto;
 }
 
@@ -128,4 +128,14 @@ button[type="submit"]:hover{
 }
 .app--login input + div{
   color:red;
+}
+
+.user--profile{
+  padding:40px 0;
+}
+.user--profile .account--details p span{
+  font-weight: bold;
+}
+.user--profile .account--details{
+  margin-bottom: 20px;
 }

@@ -4,32 +4,62 @@ import Link from 'next/link';
 import * as Yup from 'yup';
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import { Button, message, Space } from 'antd';
+import { useRouter } from 'next/navigation'
+import { setUserDetails } from '@/redux/reducerSlice/Users';
+import { useDispatch } from 'react-redux';
 const Login = () => {
-    const LoginSchema = Yup.object().shape({
-      email: Yup.string().email('Invalid email').required('Required'),
-      password: Yup.string().required('Required')
+  const router = useRouter()
+  const [msg, contextHolder] = message.useMessage();   
+  const dispatch = useDispatch()
+  const handleLogin = async(values)=>{
+    console.log(values);
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(values)
+  };
+  const res = await fetch('http://localhost:4000/login',requestOptions)
+  const data = await res.json()
+  console.log(data)
+  if(data && data.success && res.status==200) { 
+    dispatch(setUserDetails(data))
+    msg.open({
+      type: 'success',
+      content: data.msg
     });
+    setTimeout(router.push('/'), 4000);
+    
+  }else{
+    msg.error(data.msg);
+  }
+}
+  const LoginSchema = Yup.object().shape({
+    phoneNumber: Yup.string().required('Required'),
+    password: Yup.string().required('Required')
+  });
     return(
         <>
+         {contextHolder}
         <Header/>
       <div className='container'> 
       <div className="app--login">
         <h2>Please Login</h2>
         <Formik
          initialValues={{
-           email: '',
+          phoneNumber: '',
            password:''
          }}
          validationSchema={LoginSchema}
          onSubmit={values => {
-           // same shape as initial values
-           console.log(values);
+          // same shape as initial values
+           handleLogin(values)
          }}
        >
          {({ errors, touched }) => (
            <Form>
-            <Field name="email" type="email" placeholder="Email"/>
-             {errors.email && touched.email ? <div>{errors.email}</div> : null}
+            <Field name="phoneNumber" type="text" placeholder="Phone"/>
+             {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
              <Field name="password" type="password" placeholder="Password"/>
              {errors.password && touched.password ? <div>{errors.password}</div> : null}
              <button type="submit">Login</button>

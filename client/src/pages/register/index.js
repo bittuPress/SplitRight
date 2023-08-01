@@ -44,7 +44,7 @@ const Register = () => {
             type: 'success',
             content: data.msg
           });
-          setTimeout(router.push('/login'), 4000);
+          setTimeout(router.push('/'), 4000);
         }else{
           messageApi.open({
             type: 'error',

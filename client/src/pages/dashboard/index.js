@@ -1,14 +1,12 @@
 import React from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import Banner from '@/components/_1-pieces/Banner'
-export default function index() {
-  
+export default function Dashboard() {
   return (
     <>
       <Header/>
-      <Banner/>
+      
       <Footer/>
-     </>
+    </>
   )
 }
