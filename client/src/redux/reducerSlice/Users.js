@@ -18,8 +18,12 @@ const userSlice = createSlice({
           userDetails,
           isLoggedIn:true
         }
-      }
+      },
+      logoutUser(state,actions){
+        state = initialState
+        return state
+      },
     },
   })
-export const { setUserDetails} = userSlice.actions;
+export const { setUserDetails, logoutUser} = userSlice.actions;
 export default userSlice.reducer;

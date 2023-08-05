@@ -28,7 +28,7 @@ const Login = () => {
       type: 'success',
       content: data.msg
     });
-    setTimeout(router.push('/'), 4000);
+    setTimeout(router.push('/dashboard'), 4000);
     
   }else{
     msg.error(data.msg);

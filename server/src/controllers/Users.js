@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 
 
-const createUsers = async(req, res)=>{//function to register users
+const createUser = async(req, res)=>{//function to register users
     try{
         const data= await usersModel.findOne({phoneNumber:req.body.phoneNumber }) //check if number exists
         if(data) {
@@ -62,6 +62,24 @@ const loginUser=  async(req, res) => {
     }
   
 }
+const updateUser = async (req, res) => {
+    try {
+        //to check the current details of user
+        await usersModel.findByIdAndUpdate(req.params.id,{ $set: req.body })
+        const data = await usersModel.findById(req.params.id)
+        if (data) {
+            res.json({
+                msg: "User Details changed successfully",
+                success: true,
+                userDetails: data
+            })
+        }
+    } catch (error) {
+        console.log(error)
+    }
+
+
+}
 // const checkPhoneNum = async(req,res) => {
 //     if(req.params.phoneNumber){
 //         const data= await usersModel.findOne({phoneNumber:req.params.phoneNumber })
@@ -80,4 +98,4 @@ const loginUser=  async(req, res) => {
 //     }
 // }
 
-module.exports = {createUsers, loginUser}
+module.exports = {createUser, loginUser, updateUser}
