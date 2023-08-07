@@ -15,7 +15,8 @@ export default function Header() {
    }
    const content = (
       <div>
-        <p><Link href="/profile">Profile</Link></p>
+        <p><Link href="/profile">Your Account</Link></p>
+        <p><Link href="/dashboard">Dashboard</Link></p>
         <p><a onClick={handleLogout}>Logout</a></p>
       </div>
     );

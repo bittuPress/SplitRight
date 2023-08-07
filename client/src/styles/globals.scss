@@ -1,11 +1,21 @@
-body{
+@use "variables" as variable;
+@use "mixins" as mixin;
+html,body{
   margin:0;
-  font-family: 'Open Sans', sans-serif;
+  font-family: variable.$font-family;
+  .container{
+    max-width: calc(800px);
+    margin: auto;
+  }
+  .inner--cover{
+    padding:40px 0;
+  }
 }
-.container{
-  max-width: calc(800px);
-  margin: auto;
+a{
+  @include mixin.anchorStyles;
 }
+
+
 
 /* HEADER CSS STARTS */
 header{
@@ -60,7 +70,6 @@ ul.nav-menus li a:hover{
 }
 /* HEADER CSS ENDS */
 
-/*  */
 /* BANNER CSS STARTS */
 .hero{
   background-size: cover;
@@ -118,8 +127,7 @@ button[type="submit"]{
 button[type="submit"]:hover{
   opacity: 0.5;
 }
-/* BANNER CSS ENDS */
-/*  */
+
 
 /* LOGIN PAGE CSS STARTS */
 .app--login{
@@ -138,4 +146,41 @@ button[type="submit"]:hover{
 }
 .user--profile .account--details{
   margin-bottom: 20px;
+}
+.sidebar {
+    border: 2px solid #000;
+    background: #ccc;
+}
+.sidebar ul li{
+  list-style: none;
+}
+.sidebar ul li a span{
+  color:#009975;
+}
+.center--content {
+  margin: 0 20px;
+  border: 1px solid #BFBFBF;
+  background-color: white;
+  box-shadow: 0px 5px 15px #aaaaaa;
+  padding: 10px 10px 20px 10px;
+  min-height: 200px;
+}
+.dashboard .header {
+  display: flex;
+  flex-direction: row;
+}
+.dashboard .header h1{
+  margin:0;
+}
+.dashboard .header .actions {
+  margin-left: auto;
+}
+.dashboard .header .ant-btn-primary{
+  background-color: #009975;
+}
+.dashboard .header .ant-btn-primary.expenses{
+  background-color:rgb(255, 68, 51);
+}
+.dashboard .header .ant-btn-primary:hover{
+  opacity: 0.8;
 }
