@@ -9,6 +9,11 @@ export default function Sidebar() {
                 <span class="item">Dashboard</span>
             </a>
         </li>
+        <li>
+            <a href="#">
+                <span class="item">All Expenses</span>
+            </a>
+        </li>
                 
         </ul>
     </div>  

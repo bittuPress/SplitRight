@@ -64,7 +64,7 @@ export default function Profile() {
     const AccountUserFields= [
       {value: 'fullName', type: 'text'},
       {value: 'email', type: 'text'},
-      {value: 'phoneNumber', type: 'text',disable:"disabled"},
+      {value: 'phoneNumber', type: 'text'},
     ]
     let tempObj={}
     AccountUserFields.forEach((item)=> {
