@@ -49,8 +49,8 @@ Here is my ideal roadmap & features checklist for completing this project in a m
 
 
 - [ ] 
-    - [ ] User Register/Login
-    - [ ] Users create Expenses
+    - [X] User Register/Login
+    - [X] Users create Expenses
     - [ ] Can delete or modify the entries added by an individual
     - [ ] Involved users can also modify the entries
     - [ ] All action logs will be recorded
