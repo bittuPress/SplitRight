@@ -186,3 +186,28 @@ button[type="submit"]:hover{
 .dashboard .header .ant-btn-primary:hover{
   opacity: 0.8;
 }
+
+.flexcontainer {
+  display:flex;
+}
+.all--expenses{
+  .details{
+    border-bottom: 1px solid #ccc;
+    margin-top: 20px;
+    .exp--date{
+      span{
+        display: block;
+        margin-right: 1rem;
+        text-transform: uppercase;
+      }
+    }
+    .bill{
+      font-size: 12px;
+      margin-right: 1rem;
+      span{
+        font-size: 15px;
+      }
+    }
+  }
+  
+}

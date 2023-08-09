@@ -1,18 +1,18 @@
 import React from 'react'
-import { Col, Row} from 'antd'
+import Link from 'next/link';
 export default function Sidebar() {
   return (
     <div class="sidebar">
        <ul>
         <li>
-            <a href="#">
+            <Link href="/dashboard">
                 <span class="item">Dashboard</span>
-            </a>
+            </Link>
         </li>
         <li>
-            <a href="#">
+            <Link href="/expenses">
                 <span class="item">All Expenses</span>
-            </a>
+            </Link>
         </li>
                 
         </ul>
