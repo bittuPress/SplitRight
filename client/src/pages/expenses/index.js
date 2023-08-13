@@ -38,7 +38,7 @@ const fetchExpenses = async() =>{
 }
 useEffect(() => {
     fetchExpenses()
-},[])
+},[isExpModalOpen])
   return (
     <>
       {contextHolder}
