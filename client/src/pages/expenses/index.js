@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Sidebar from '@/components/dashboard/Sidebar'
@@ -28,23 +28,34 @@ export default function Expenses() {
       msg.info(data.msg)
     }
 }
+
+//loading all expenses using useEffect hook
+const [expenses,setExpenses] = useState([])
+const fetchExpenses = async() =>{
+    const res = await fetch('http://localhost:4000/expenses')
+    const {data} = await res.json()
+    setExpenses(data)
+}
+useEffect(() => {
+    fetchExpenses()
+},[])
   return (
     <>
       {contextHolder}
       <Header/>
-      <div className='container inner--cover'>
-        <div className='dashboard'>
+      <div className="container inner--cover">
+        <div className="dashboard">
           <Row>
             <Col span={6}>
               <Sidebar/>
             </Col>
             <Col span={18}>
-              <div className='center--content'>
-                <div className='header'>
+              <div className="center--content">
+                <div className="header">
                   <h1>Expenses</h1>
-                  <div className='actions'>
+                  <div className="actions">
                     <Space wrap>
-                        <Button type="primary" className='expenses' onClick={()=>setIsExpModalOpen(true)}>Add Expense</Button>
+                        <Button type="primary" className="expenses" onClick={()=>setIsExpModalOpen(true)}>Add Expense</Button>
                         <Button type="primary">Settle up</Button>
                     </Space>
                     <Modal
@@ -54,34 +65,39 @@ export default function Expenses() {
                     </Modal>
                   </div>
                 </div>
-                <div className='all--expenses'>
-                    <div className='details'>
-                    <Row>
-                        <Col span={14}>
-                            <div className='flexcontainer'>
-                                <div className='exp--date'>
-                                    <p><span>Aug</span> 08</p>
-                                </div>
-                                <div className='exp--title'>
-                                    <h2>Uber Cab</h2>
-                                </div>
-                            </div>
-                        </Col>
-                        <Col span={10}>
-                            <div className='flexcontainer'>
-                                <div className='bill'>
-                                    shyam paid<br/>
-                                    <span class="number">$30.00</span>
-                                </div>
-                                <div className='you'>
-                                    shyam lent you<br/>
-                                    <span class="number">$10.00</span>
-                                </div>
-                            </div>
-                        </Col>
-                    </Row>
-                    </div>
-                </div>
+             
+                { expenses.length > 0 ? (
+                <div className="all--expenses">
+                    { expenses.map((item) => {
+                            return <div className="details">
+                            <Row>
+                                <Col span={14}>
+                                    <div className="flexcontainer">
+                                        <div className="exp--date">
+                                            <p><span>Aug</span> 08</p>
+                                        </div>
+                                        <div className="exp--title">
+                                            <h2>{item.description}</h2>
+                                        </div>
+                                    </div>
+                                </Col>
+                                <Col span={10}>
+                                    <div className="flexcontainer">
+                                        <div className="bill">
+                                        {item.paidBy} paid<br/>
+                                            <span class="number">${item.billAmount}</span>
+                                        </div>
+                                        <div className="you">
+                                        {item.paidBy} lent you<br/>
+                                            <span class="number">${item.billAmount / 2}</span>
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </div>
+                        })}
+                 </div>
+                 ): "loading"}
               </div>
             </Col>
           </Row>

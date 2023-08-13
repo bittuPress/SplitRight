@@ -17,7 +17,7 @@ const createExpense = async(req, res)=>{//function to create expense
     }
     
 }
-const getUserExpense = async(req, res)=>{//function to get all current user expenses
+const getUserExpenses = async(req, res)=>{//function to get all current user expenses
     try{
         const data = await expenseModel.find()
         if(data){
@@ -36,4 +36,4 @@ const getUserExpense = async(req, res)=>{//function to get all current user expe
     }
     
 }
-module.exports = {createExpense,getUserExpense}
+module.exports = {createExpense,getUserExpenses}
