@@ -17,15 +17,18 @@ const getBase64 = (img, callback) => {
     }
     return isJpgOrPng && isLt2M;
   };
-  const ImageUpload = () => {
+  const ImageUpload = (props) => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
     const handleChange = (info) => {
+      
       if (info.file.status === 'uploading') {
         setLoading(true);
         return;
       }
       if (info.file.status === 'done') {
+        props.imageCallBack(info.file.originFileObj)
+        console.log(info)
         // Get this url from response in real world.
         getBase64(info.file.originFileObj, (url) => {
           setLoading(false);
@@ -48,18 +51,18 @@ const getBase64 = (img, callback) => {
     return (
       <>
         <Upload
-          name="avatar"
+          name="receipt"
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          // action="http://localhost:5000/image-upload"
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >
           {imageUrl ? (
             <img
               src={imageUrl}
-              alt="avatar"
+              alt="receipt"
               style={{
                 width: '100%',
               }}

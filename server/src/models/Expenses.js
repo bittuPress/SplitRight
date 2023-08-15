@@ -7,6 +7,7 @@ const expSchema = new Schema({
  expensesDate: { type: Date, default: Date.now},
  addedBy: { type: String, default: ""},
  friendsInvolved: { type: String, default: ""},
+ receiptImage: String
 });
  
 const Expenses = mongoose.model('Expenses', expSchema);

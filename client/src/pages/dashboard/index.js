@@ -18,7 +18,7 @@ export default function Dashboard() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values)
     };
-    const res = await fetch('http://localhost:4000/add-expenses', requestOptions)
+    const res = await fetch('http://localhost:5000/add-expenses', requestOptions)
     const data = await res.json()
     if(data.success){
       setIsExpModalOpen(false)

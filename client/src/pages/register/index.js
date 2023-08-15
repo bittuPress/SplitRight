@@ -35,7 +35,7 @@ const Register = () => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formFields)
         };
-        const res = await fetch('http://localhost:4000/register', requestOptions)
+        const res = await fetch('http://localhost:5000/register', requestOptions)
         const data = await res.json()
         if(data.success){
           // debugger;

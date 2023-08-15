@@ -19,7 +19,7 @@ const Login = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(values)
   };
-  const res = await fetch('http://localhost:4000/login',requestOptions)
+  const res = await fetch('http://localhost:5000/login',requestOptions)
   const data = await res.json()
   console.log(data)
   if(data && data.success && res.status==200) { 

@@ -81,7 +81,7 @@ export default function Profile() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(values)
         };
-        const res = await fetch(`http://localhost:4000/user/${userDetails._id}`, requestOptions)
+        const res = await fetch(`http://localhost:5000/user/${userDetails._id}`, requestOptions)
         const data = await res.json()
         if (data && data.success && res.status == 200) {
           dispatch(setUserDetails(data))

@@ -11,14 +11,18 @@ export default function Expenses() {
   const [isExpModalOpen, setIsExpModalOpen] = useState(false)
   const [msg, contextHolder] = message.useMessage()
   const handleExpense = async(values) =>{
-    // console.log(userDetails)
+    console.log(values)
+    //debugger
      values.addedBy = userDetails._id
+     const formData = new FormData()
+     Object.entries(values).forEach((item)=>{
+      formData.append(item[0], item[1])
+     })
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values)
+        body: formData
     };
-    const res = await fetch('http://localhost:4000/add-expenses', requestOptions)
+    const res = await fetch('http://localhost:5000/add-expenses', requestOptions)
     const data = await res.json()
     if(data.success){
       setIsExpModalOpen(false)
@@ -32,7 +36,7 @@ export default function Expenses() {
 //loading all expenses using useEffect hook
 const [expenses,setExpenses] = useState([])
 const fetchExpenses = async() =>{
-    const res = await fetch('http://localhost:4000/expenses')
+    const res = await fetch('http://localhost:5000/expenses')
     const {data} = await res.json()
     setExpenses(data)
 }
