@@ -6,31 +6,6 @@ const dateFormat = 'YYYY/MM/DD';
 const onFinishFailed = (errorInfo) => {
 console.log('Failed:', errorInfo);
 }
-const [imageFile, setImageFile] = useState()
-const handleImageName = (imgFile) =>{
-  setImageFile(imgFile)
-}
-const handleExpense = async(values) =>{
-  console.log(values)
-  console.log(imageFile)
-  //debugger
-    const formData = new FormData()
-   Object.entries(values).forEach((item)=>{
-    formData.append(item[0], item[1])
-   })
-   formData.append('receiptImage', imageFile)
-  const requestOptions = {
-      method: 'POST',
-      body: formData
-  };
-  const res = await fetch('http://localhost:5000/add-expenses', requestOptions)
-  const data = await res.json()
-  if(data.success){
-    console.log(data.msg)
-  }else{
-    console.log(data.msg)
-  }
-}
 return (
     <div>
      <Form
@@ -41,7 +16,7 @@ return (
       initialValues={{
         remember: true,
       }}
-      onFinish={handleExpense}
+      onFinish= {props.handleSubmit}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
@@ -110,7 +85,7 @@ return (
         </Col>
         <Col span={6}>
           <Form.Item>
-            <ImageUpload imageCallBack={handleImageName}/>
+            <ImageUpload/>
           </Form.Item>
         </Col>
       </Row>

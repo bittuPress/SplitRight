@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons'
 import { message, Upload } from 'antd'
+import { setExpensesDetails } from '@/redux/reducerSlice/Expenses';
+import { useDispatch } from 'react-redux';
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -17,9 +19,10 @@ const getBase64 = (img, callback) => {
     }
     return isJpgOrPng && isLt2M;
   };
-  const ImageUpload = (props) => {
+  const ImageUpload = () => {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
+    const dispatch = useDispatch()
     const handleChange = (info) => {
       
       if (info.file.status === 'uploading') {
@@ -27,8 +30,7 @@ const getBase64 = (img, callback) => {
         return;
       }
       if (info.file.status === 'done') {
-        props.imageCallBack(info.file.originFileObj)
-        console.log(info)
+         dispatch(setExpensesDetails(info.file.originFileObj))
         // Get this url from response in real world.
         getBase64(info.file.originFileObj, (url) => {
           setLoading(false);
@@ -55,7 +57,6 @@ const getBase64 = (img, callback) => {
           listType="picture-card"
           className="avatar-uploader"
           showUploadList={false}
-          // action="http://localhost:5000/image-upload"
           beforeUpload={beforeUpload}
           onChange={handleChange}
         >

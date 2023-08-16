@@ -10,14 +10,18 @@ export default function Expenses() {
   const {userDetails} = useSelector(state=>state.users)
   const [isExpModalOpen, setIsExpModalOpen] = useState(false)
   const [msg, contextHolder] = message.useMessage()
+  const {imageFile} = useSelector(state=>state.expenses)
+  console.log("check image file", imageFile)
   const handleExpense = async(values) =>{
     console.log(values)
-    //debugger
+    
+    debugger
      values.addedBy = userDetails._id
      const formData = new FormData()
      Object.entries(values).forEach((item)=>{
       formData.append(item[0], item[1])
      })
+     formData.append('receiptImage', imageFile)
     const requestOptions = {
         method: 'POST',
         body: formData

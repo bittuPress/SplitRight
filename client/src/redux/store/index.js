@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import logger from 'redux-logger' 
 import users from '../reducerSlice/Users'
+import expenses from '../reducerSlice/Expenses'
 
 const persistConfig = {
     key: 'root',
@@ -11,6 +12,7 @@ const persistConfig = {
 }
 const reducer = combineReducers({
     users,
+    expenses
 })
 const persistedReducer = persistReducer(persistConfig, reducer)
 export const store = configureStore({
