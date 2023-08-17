@@ -14,6 +14,6 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 router.post('/add-expenses',upload.single('receiptImage'),expensesController.createExpense)//route to create expense
-router.post('/image-upload',expensesController.imageUpload)//route to create expense
 router.get('/expenses', expensesController.getUserExpenses)
+router.get('/expenses-img/:id', expensesController.getExpenseImgById)
 module.exports=router;

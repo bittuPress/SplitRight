@@ -5,23 +5,22 @@ import Sidebar from '@/components/dashboard/Sidebar'
 import { Col, Row,Button, Space, Modal, message, Form} from 'antd'
 import ExpenseForm from '@/components/dashboard/ExpenseForm'
 import { useSelector } from 'react-redux'
+import Image from 'next/image'
+
 export default function Expenses() {
 
   const {userDetails} = useSelector(state=>state.users)
   const [isExpModalOpen, setIsExpModalOpen] = useState(false)
   const [msg, contextHolder] = message.useMessage()
   const {imageFile} = useSelector(state=>state.expenses)
-  console.log("check image file", imageFile)
+  console.log("check image file", JSON.stringify(imageFile))
   const handleExpense = async(values) =>{
-    console.log(values)
-    
-    debugger
-     values.addedBy = userDetails._id
+    values.addedBy = userDetails._id
      const formData = new FormData()
      Object.entries(values).forEach((item)=>{
       formData.append(item[0], item[1])
      })
-     formData.append('receiptImage', imageFile)
+    // formData.append('receiptImage', imageFile)
     const requestOptions = {
         method: 'POST',
         body: formData
@@ -70,6 +69,7 @@ useEffect(() => {
                         footer={null}
                         title="Add Expenses" open={isExpModalOpen} onCancel={()=>setIsExpModalOpen(false)} >
                         <ExpenseForm handleSubmit={handleExpense}/>
+                         da{JSON.stringify(imageFile)}
                     </Modal>
                   </div>
                 </div>
@@ -92,12 +92,13 @@ useEffect(() => {
                                 <Col span={10}>
                                     <div className="flexcontainer">
                                         <div className="bill">
-                                        {item.paidBy} paid<br/>
-                                            <span class="number">${item.billAmount}</span>
+                                          {item.paidBy} paid<br/>
+                                          <span className="number">${item.billAmount}</span>
                                         </div>
                                         <div className="you">
-                                        {item.paidBy} lent you<br/>
-                                            <span class="number">${item.billAmount / 2}</span>
+                                          {item.paidBy} lent you<br/>
+                                          <span className="number">${item.billAmount / 2}</span>
+                                          <Image src={`http://localhost:5000/expenses-img/${item._id}`} alt={item.description} width={50} height={50}/>
                                         </div>
                                     </div>
                                 </Col>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
-    imageFile: ''
+    imageFile: {}
 };
 
 const expensesSlice = createSlice({
