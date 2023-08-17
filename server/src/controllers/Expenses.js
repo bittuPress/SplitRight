@@ -52,4 +52,20 @@ const getExpenseImgById = async(req,res) => {
     }
 
 }
-module.exports = {createExpense,getUserExpenses,getExpenseImgById}
+
+const deleteExpense = async (req, res) => {
+    try {
+        const data = await expenseModel.findByIdAndDelete(req.params.id)
+        if (data) {
+            res.json({
+                msg: "Expense deleted successfully",
+                success: true
+            })
+        }
+
+    } catch(error) {
+        console.log(error);
+    }
+
+}
+module.exports = {createExpense,getUserExpenses,getExpenseImgById,deleteExpense}

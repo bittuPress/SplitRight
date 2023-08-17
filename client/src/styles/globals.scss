@@ -209,5 +209,13 @@ button[type="submit"]:hover{
       }
     }
   }
-  
+  .actions{
+    margin-left: auto;
+    span{
+      cursor: pointer;
+    }
+    .anticon-delete{
+      color:red;
+    }
+  }
 }
