@@ -2,45 +2,19 @@ import React, { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Sidebar from '@/components/dashboard/Sidebar'
-import { Col, Row,Button, Space, Modal, message, Form, Popconfirm, Tooltip,Skeleton} from 'antd'
-import ExpenseForm from '@/components/dashboard/ExpenseForm'
-import { useSelector } from 'react-redux'
+import { Col, Row,Button, Space, Modal, message,Popconfirm, Tooltip,Skeleton} from 'antd'
 import {DeleteOutlined} from '@ant-design/icons';
-
+import ExpenseHeader from '@/components/dashboard/ExpenseHeader'
 export default function Expenses() {
-
-  const {userDetails} = useSelector(state=>state.users)
-  const [isExpModalOpen, setIsExpModalOpen] = useState(false)
-  const [msg, contextHolder] = message.useMessage()
-  // const {imageFile} = useSelector(state=>state.expenses)
-  const handleExpense = async(values) =>{//create a new expense
-    console.log(values)
-    
-    values.addedBy = userDetails._id
-     const formData = new FormData()
-     Object.entries(values).forEach((item)=>{
-      formData.append(item[0], item[1])
-     })
-    // formData.append('receiptImage', imageFile)
-    const requestOptions = {
-        method: 'POST',
-        body: formData
-    };
-    const res = await fetch('http://localhost:5000/add-expenses', requestOptions)
-    const data = await res.json()
-    if(data.success){
-      setIsExpModalOpen(false)
-      msg.info(data.msg)
-    }else{
-      setIsExpModalOpen(true)
-      msg.info(data.msg)
-    }
-}
-
+const [msg, contextHolder] = message.useMessage()
 //loading all expenses using useEffect hook
 const [expenses,setExpenses] = useState([])
 const [isEditOpen, setIsEditOpen] = useState(false)
 const [isDelete, setIsDelete] = useState(false)
+const [isModalChange, setIsModalChange] = useState(false)
+const isModalClose = (arg) =>{
+  setIsModalChange(arg)
+}
 const fetchExpenses = async() =>{//get all the expenses
     const res = await fetch('http://localhost:5000/expenses')
     const {data} = await res.json()
@@ -51,16 +25,15 @@ const deleteExpense = async (ID) => {//delete the expense
   try {
     const res = await fetch(`http://localhost:5000/delete-expense/${ID}`, { method: 'DELETE'});
     const data = await res.json()
-    message.success(data.msg);
+    msg.info(data.msg);
     setIsDelete(true)
-
   } catch (error) {
     console.error(error);
   }
 };
 useEffect(() => {
     fetchExpenses()
-},[isExpModalOpen,isDelete])
+},[isModalChange,isDelete])
 
 const getTwoDigitDay = (day)=>{
   return day.toString().padStart(2, '0');
@@ -78,20 +51,8 @@ const getTwoDigitDay = (day)=>{
             <Col span={18}>
               <div className="center--content">
                 <div className="header">
-                  <h1>Expenses</h1>
-                  <div className="actions">
-                    <Space wrap>
-                        <Button type="primary" className="expenses" onClick={()=>setIsExpModalOpen(true)}>Add Expense</Button>
-                        <Button type="primary">Settle up</Button>
-                    </Space>
-                    <Modal
-                        footer={null}
-                        title="Add Expense" open={isExpModalOpen} onCancel={()=>setIsExpModalOpen(false)} >
-                        <ExpenseForm handleSubmit={handleExpense}/>
-                    </Modal>
-                  </div>
+                  <ExpenseHeader title="Expenses" modalCallBack={isModalClose}/>
                 </div>
-             
                 { expenses.length > 0 ? (
                 <div className="all--expenses">
                     { expenses.map((item) => {
