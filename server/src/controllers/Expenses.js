@@ -4,8 +4,7 @@ const path= require('path')
 const fs =require('fs')
 const createExpense = async(req, res)=>{//function to create expense
     
-    if(req.file.filename) req.body.receiptImage = req.file.filename
-    console.log(req.body)
+    // if(req.file.filename) req.body.receiptImage = req.file.filename
     try{
         const insertData = await expenseModel.create(req.body)
         if(insertData){

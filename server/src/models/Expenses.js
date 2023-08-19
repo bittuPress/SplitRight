@@ -4,7 +4,7 @@ const expSchema = new Schema({
  description: String, 
  billAmount: Number,
  paidBy: String,
- expensesDate: { type: Date, default: Date.now},
+ expensesDate: { type: Date},
  addedBy: { type: String, default: ""},
  friendsInvolved: { type: String, default: ""},
  receiptImage: String

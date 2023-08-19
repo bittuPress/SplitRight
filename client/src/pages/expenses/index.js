@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Sidebar from '@/components/dashboard/Sidebar'
-import { Col, Row,Button, Space, Modal, message, Form, Popconfirm, Tooltip} from 'antd'
+import { Col, Row,Button, Space, Modal, message, Form, Popconfirm, Tooltip,Skeleton} from 'antd'
 import ExpenseForm from '@/components/dashboard/ExpenseForm'
 import { useSelector } from 'react-redux'
-import Image from 'next/image'
 import {DeleteOutlined} from '@ant-design/icons';
 
 export default function Expenses() {
@@ -15,6 +14,8 @@ export default function Expenses() {
   const [msg, contextHolder] = message.useMessage()
   // const {imageFile} = useSelector(state=>state.expenses)
   const handleExpense = async(values) =>{//create a new expense
+    console.log(values)
+    
     values.addedBy = userDetails._id
      const formData = new FormData()
      Object.entries(values).forEach((item)=>{
@@ -36,18 +37,17 @@ export default function Expenses() {
     }
 }
 
-
-
 //loading all expenses using useEffect hook
 const [expenses,setExpenses] = useState([])
 const [isEditOpen, setIsEditOpen] = useState(false)
 const [isDelete, setIsDelete] = useState(false)
-const fetchExpenses = async() =>{
+const fetchExpenses = async() =>{//get all the expenses
     const res = await fetch('http://localhost:5000/expenses')
     const {data} = await res.json()
     setExpenses(data)
 }
 const deleteExpense = async (ID) => {//delete the expense
+  setIsDelete(false)
   try {
     const res = await fetch(`http://localhost:5000/delete-expense/${ID}`, { method: 'DELETE'});
     const data = await res.json()
@@ -62,6 +62,9 @@ useEffect(() => {
     fetchExpenses()
 },[isExpModalOpen,isDelete])
 
+const getTwoDigitDay = (day)=>{
+  return day.toString().padStart(2, '0');
+}
   return (
     <>
       {contextHolder}
@@ -83,7 +86,7 @@ useEffect(() => {
                     </Space>
                     <Modal
                         footer={null}
-                        title="Add Expenses" open={isExpModalOpen} onCancel={()=>setIsExpModalOpen(false)} >
+                        title="Add Expense" open={isExpModalOpen} onCancel={()=>setIsExpModalOpen(false)} >
                         <ExpenseForm handleSubmit={handleExpense}/>
                     </Modal>
                   </div>
@@ -92,12 +95,18 @@ useEffect(() => {
                 { expenses.length > 0 ? (
                 <div className="all--expenses">
                     { expenses.map((item) => {
+                        
+                        let date = new Date(item.expensesDate)
+                        let day = getTwoDigitDay(date.getDate())//gets two digit day
+                        let nameOfMonthUS = new Intl.DateTimeFormat('en-US', {//get name of a month
+                          month: 'short',
+                        }).format(date)
                             return <div className="details">
                             <Row>
                                 <Col span={14}>
                                     <div className="flexcontainer">
                                         <div className="exp--date">
-                                            <p><span>Aug</span> 08</p>
+                                            <p><span>{nameOfMonthUS}</span> {day}</p>
                                         </div>
                                         <div className="exp--title">
                                             <h2>{item.description}</h2>
@@ -117,13 +126,13 @@ useEffect(() => {
                                         </div>
                                         <div className='actions'>
                                         <Popconfirm
-                                            title="Delete the User"
-                                            description="Are you sure to delete this user?"
+                                            title="Delete the Expense"
+                                            description="Are you sure to delete this expense?"
                                             onCancel={() => setIsEditOpen(false)}
                                             onConfirm={() => deleteExpense(item._id)} 
                                             okText="Yes"
                                             cancelText="No"
-                                          >
+                                        >
                                             <Tooltip className='' placement="top">
                                               <DeleteOutlined/>
                                             </Tooltip>
@@ -136,7 +145,7 @@ useEffect(() => {
                         </div>
                         })}
                  </div>
-                 ): "loading"}
+                 ): <Skeleton active />}
               </div>
             </Col>
           </Row>

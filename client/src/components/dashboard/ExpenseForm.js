@@ -1,11 +1,11 @@
-import { Button, Form, Input, DatePicker, Select, message, Col, Row} from 'antd';
-import React, { useState } from 'react';
-import ImageUpload from '../modules/ImageUpload';
+import { Button, Form, Input, DatePicker, Select, message, Col, Row} from 'antd'
+import React, { useState } from 'react'
+import ImageUpload from '../modules/ImageUpload'
+import dayjs from 'dayjs'
 export default function ExpenseForm(props) {
-const dateFormat = 'YYYY/MM/DD';
-const onFinishFailed = (errorInfo) => {
-console.log('Failed:', errorInfo);
-}
+const dateFormat = 'YYYY/MM/DD'
+let now = dayjs()
+let defaultDate = dayjs(now.format(), dateFormat)
 return (
     <div>
      <Form
@@ -15,9 +15,9 @@ return (
       }}
       initialValues={{
         remember: true,
+        ["expensesDate"]: defaultDate
       }}
       onFinish= {props.handleSubmit}
-      onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
       <Row>
@@ -25,6 +25,12 @@ return (
           <Form.Item
             label= ""
             name="description"
+            rules={[
+              {
+                required: true,
+                message: 'Please input description!',
+              },
+            ]}
           >
             <Input placeholder='Description'/>
             
@@ -45,7 +51,14 @@ return (
           </Form.Item>
           <Form.Item
             label=""
-            name="paidBy">
+            name="paidBy"
+            rules={[
+              {
+                required: true,
+                message: 'Please select the user paid',
+              },
+            ]}
+            >
           <Select
             showSearch
             placeholder="Paid by"
@@ -70,7 +83,7 @@ return (
         />
         </Form.Item>
           <Form.Item name="expensesDate">
-              <DatePicker format={dateFormat}/>
+              <DatePicker format={dateFormat} defaultValue={defaultDate}/>
             </Form.Item>
           <Form.Item
             wrapperCol={{
