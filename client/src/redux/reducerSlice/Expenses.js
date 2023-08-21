@@ -9,10 +9,10 @@ const expensesSlice = createSlice({
     reducers: {
       setExpensesDetails(state,actions) {
         // debugger;
-        const {imageFile} = actions.payload
+        const {file} = actions.payload
         return{//adding image file object on existing state
           ...state,
-          imageFile,
+          imageFile:file,
         }
       },
     },

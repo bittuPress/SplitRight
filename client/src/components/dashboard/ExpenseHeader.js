@@ -4,11 +4,13 @@ import {Button, Space, Modal, message} from 'antd'
 import { useSelector } from 'react-redux'
 export default function ExpenseHeader(props) {
     const {userDetails} = useSelector(state=>state.users)
-     // const {imageFile} = useSelector(state=>state.expenses)
+    const {imageFile} = useSelector(state=>state.expenses)
+    // console.log(imageFile)
     const [isExpModalOpen, setIsExpModalOpen] = useState(false) 
     const [msg, contextHolder] = message.useMessage()
     if(props.modalCallBack) props.modalCallBack(isExpModalOpen)
     const handleExpense = async(values) =>{//create a new expense
+
         console.log(values)
         values.addedBy = userDetails._id
             const formData = new FormData()

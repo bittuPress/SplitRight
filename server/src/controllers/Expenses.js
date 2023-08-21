@@ -22,14 +22,24 @@ const createExpense = async(req, res)=>{//function to create expense
     }
     
 }
-const getUserExpenses = async(req, res)=>{//function to get all current user expenses
+const getUserExpenses = async(req, res)=>{//function to get all  expenses
     try{
-        const data = await expenseModel.find()
+        const count = await expenseModel.find().count()
+        let data
+        if(req.query.size && req.query.page){
+            data = await expenseModel.find()
+            .skip(req.query.page)
+            .limit(req.query.size)
+        }else{
+            data = await expenseModel.find()
+        }
         if(data){
             res.json({
                 data,
                 msg: "Fetching Data",
-                success: true
+                success: true,
+                total:count
+
             })
         }
         

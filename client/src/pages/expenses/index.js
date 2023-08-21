@@ -12,14 +12,18 @@ const [expenses,setExpenses] = useState([])
 const [isEditOpen, setIsEditOpen] = useState(false)
 const [isDelete, setIsDelete] = useState(false)
 const [isModalChange, setIsModalChange] = useState(false)
+const [isLoadMore,setIsLoadMore] = useState(true)
 const isModalClose = (arg) =>{
   setIsModalChange(arg)
 }
-const fetchExpenses = async() =>{//get all the expenses
-    const res = await fetch('http://localhost:5000/expenses')
-    const {data} = await res.json()
-    setExpenses(data)
+const fetchExpenses = async(page=0, size=3) =>{//get all the expenses
+    const res = await fetch(`http://localhost:5000/expenses?page=${page}&size=${size}`)
+    const data = await res.json()
+    
+    setExpenses([...expenses, ...data.data])
+    if(data.total === expenses.length + size) setIsLoadMore(false)
 }
+
 const deleteExpense = async (ID) => {//delete the expense
   setIsDelete(false)
   try {
@@ -35,6 +39,9 @@ useEffect(() => {
     fetchExpenses()
 },[isModalChange,isDelete])
 
+const loadMore = () =>{
+  fetchExpenses(expenses.length,3)
+}
 const getTwoDigitDay = (day)=>{
   return day.toString().padStart(2, '0');
 }
@@ -105,8 +112,16 @@ const getTwoDigitDay = (day)=>{
                             </Row>
                         </div>
                         })}
+                        
+                        
+                       
                  </div>
                  ): <Skeleton active />}
+                 
+                 { isLoadMore ? (
+                 <button onClick={loadMore}>Load more</button> 
+                 ): ""} 
+                 
               </div>
             </Col>
           </Row>
