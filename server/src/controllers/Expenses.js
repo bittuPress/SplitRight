@@ -27,11 +27,11 @@ const getUserExpenses = async(req, res)=>{//function to get all  expenses
         const count = await expenseModel.find().count()
         let data
         if(req.query.size && req.query.page){
-            data = await expenseModel.find()
+            data = await expenseModel.find().sort({_id:-1})
             .skip(req.query.page)
             .limit(req.query.size)
         }else{
-            data = await expenseModel.find()
+            data = await expenseModel.find().sort({_id:-1})
         }
         if(data){
             res.json({

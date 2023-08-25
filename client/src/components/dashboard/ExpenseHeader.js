@@ -8,7 +8,6 @@ export default function ExpenseHeader(props) {
     // console.log(imageFile)
     const [isExpModalOpen, setIsExpModalOpen] = useState(false) 
     const [msg, contextHolder] = message.useMessage()
-    if(props.modalCallBack) props.modalCallBack(isExpModalOpen)
     const handleExpense = async(values) =>{//create a new expense
 
         console.log(values)
@@ -25,6 +24,7 @@ export default function ExpenseHeader(props) {
         const res = await fetch('http://localhost:5000/add-expenses', requestOptions)
         const data = await res.json()
         if(data.success){
+            if(props.getExpenses) props.getExpenses()
             setIsExpModalOpen(false)
             msg.info(data.msg)
         }else{

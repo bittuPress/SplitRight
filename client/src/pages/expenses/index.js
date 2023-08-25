@@ -11,17 +11,17 @@ const [msg, contextHolder] = message.useMessage()
 const [expenses,setExpenses] = useState([])
 const [isEditOpen, setIsEditOpen] = useState(false)
 const [isDelete, setIsDelete] = useState(false)
-const [isModalChange, setIsModalChange] = useState(false)
 const [isLoadMore,setIsLoadMore] = useState(true)
-const isModalClose = (arg) =>{
-  setIsModalChange(arg)
-}
-const fetchExpenses = async(page=0, size=3) =>{//get all the expenses
+const fetchExpenses = async(page=0, size=10,action="") =>{//get all the expenses
     const res = await fetch(`http://localhost:5000/expenses?page=${page}&size=${size}`)
     const data = await res.json()
-    
-    setExpenses([...expenses, ...data.data])
-    if(data.total === expenses.length + size) setIsLoadMore(false)
+    // console.log(data)
+    if(page && size && action == "loadmore"){
+      setExpenses([...expenses, ...data.data])
+    }else{
+      setExpenses(data.data)
+    }
+    data.total <= expenses.length + size ? setIsLoadMore(false) : setIsLoadMore(true)//set load more button
 }
 
 const deleteExpense = async (ID) => {//delete the expense
@@ -37,10 +37,10 @@ const deleteExpense = async (ID) => {//delete the expense
 };
 useEffect(() => {
     fetchExpenses()
-},[isModalChange,isDelete])
+},[isDelete])
 
 const loadMore = () =>{
-  fetchExpenses(expenses.length,3)
+  fetchExpenses(expenses.length,10,"loadmore")
 }
 const getTwoDigitDay = (day)=>{
   return day.toString().padStart(2, '0');
@@ -58,7 +58,7 @@ const getTwoDigitDay = (day)=>{
             <Col span={18}>
               <div className="center--content">
                 <div className="header">
-                  <ExpenseHeader title="Expenses" modalCallBack={isModalClose}/>
+                  <ExpenseHeader title="Expenses" getExpenses={fetchExpenses}/>
                 </div>
                 { expenses.length > 0 ? (
                 <div className="all--expenses">
