@@ -3,8 +3,9 @@ import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Sidebar from '@/components/dashboard/Sidebar'
 import { Col, Row,Button, Space, Modal, message,Popconfirm, Tooltip,Skeleton} from 'antd'
-import {DeleteOutlined} from '@ant-design/icons';
+import {DeleteOutlined,EditOutlined} from '@ant-design/icons';
 import ExpenseHeader from '@/components/dashboard/ExpenseHeader'
+import Link from 'next/link'
 export default function Expenses() {
 const [msg, contextHolder] = message.useMessage()
 //loading all expenses using useEffect hook
@@ -59,6 +60,7 @@ const getTwoDigitDay = (day)=>{
               <div className="center--content">
                 <div className="header">
                   <ExpenseHeader title="Expenses" getExpenses={fetchExpenses}/>
+                  
                 </div>
                 { expenses.length > 0 ? (
                 <div className="all--expenses">
@@ -93,6 +95,7 @@ const getTwoDigitDay = (day)=>{
                                           {/* <Image src={`http://localhost:5000/expenses-img/${item._id}`} alt={item.description} width={50} height={50}/> */}
                                         </div>
                                         <div className='actions'>
+                                        <Link href={{ pathname: '/expenses/edit', query: { id:item._id } }}><EditOutlined /></Link>
                                         <Popconfirm
                                             title="Delete the Expense"
                                             description="Are you sure to delete this expense?"

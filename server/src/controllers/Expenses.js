@@ -61,7 +61,37 @@ const getExpenseImgById = async(req,res) => {
     }
 
 }
+const getUserExpensesById = async(req,res) => {
 
+    const data =  await expenseModel.findById(req.params.id)
+    console.log(data)
+    if(data){
+        res.json({
+            success: true,
+            userData:data
+
+        })
+    }
+
+}
+const updateExpense = async (req, res) => {
+    // try {
+    //     //to check the current details of user
+    //     await usersModel.findByIdAndUpdate(req.params.id,{ $set: req.body })
+    //     const data = await usersModel.findById(req.params.id)
+    //     if (data) {
+    //         res.json({
+    //             msg: "User Details changed successfully",
+    //             success: true,
+    //             userDetails: data
+    //         })
+    //     }
+    // } catch (error) {
+    //     console.log(error)
+    // }
+
+
+}
 const deleteExpense = async (req, res) => {
     try {
         const data = await expenseModel.findByIdAndDelete(req.params.id)
@@ -77,4 +107,4 @@ const deleteExpense = async (req, res) => {
     }
 
 }
-module.exports = {createExpense,getUserExpenses,getExpenseImgById,deleteExpense}
+module.exports = {createExpense,getUserExpenses,getExpenseImgById,deleteExpense,updateExpense,getUserExpensesById}
