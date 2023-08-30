@@ -46,7 +46,7 @@ const loadMore = () =>{
 const getTwoDigitDay = (day)=>{
   return day.toString().padStart(2, '0');
 }
-  return (
+return (
     <>
       {contextHolder}
       <Header/>
@@ -64,10 +64,10 @@ const getTwoDigitDay = (day)=>{
                 </div>
                 { expenses.length > 0 ? (
                 <div className="all--expenses">
-                    { expenses.map((item) => {
-                        
+                    {
+                     expenses.map((item) => {
                         let date = new Date(item.expensesDate)
-                        let day = getTwoDigitDay(date.getDate())//gets two digit day
+                        let day = getTwoDigitDay(date.getDate()-1)//gets two digit day
                         let nameOfMonthUS = new Intl.DateTimeFormat('en-US', {//get name of a month
                           month: 'short',
                         }).format(date)
@@ -95,7 +95,7 @@ const getTwoDigitDay = (day)=>{
                                           {/* <Image src={`http://localhost:5000/expenses-img/${item._id}`} alt={item.description} width={50} height={50}/> */}
                                         </div>
                                         <div className='actions'>
-                                        <Link href={{ pathname: '/expenses/edit', query: { id:item._id } }}><EditOutlined /></Link>
+                                        <Link href={`/expenses/edit/${item._id}`}><EditOutlined /></Link>
                                         <Popconfirm
                                             title="Delete the Expense"
                                             description="Are you sure to delete this expense?"

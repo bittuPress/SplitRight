@@ -26,7 +26,7 @@ const editExpense = () =>{
                 <div className="header">
                   <ExpenseHeader title="Edit Expense"/>
                 </div>
-                <ExpenseForm handleSubmit={editExpense}/>
+                <ExpenseForm/>
                </div>
             </Col>
           </Row>

@@ -9,13 +9,11 @@ export default function ExpenseHeader(props) {
     const [isExpModalOpen, setIsExpModalOpen] = useState(false) 
     const [msg, contextHolder] = message.useMessage()
     const handleExpense = async(values) =>{//create a new expense
-
-        console.log(values)
         values.addedBy = userDetails._id
-            const formData = new FormData()
-            Object.entries(values).forEach((item)=>{
-            formData.append(item[0], item[1])
-            })
+        const formData = new FormData()
+        Object.entries(values).forEach((item)=>{
+        formData.append(item[0], item[1])
+        })
         // formData.append('receiptImage', imageFile)
         const requestOptions = {
             method: 'POST',

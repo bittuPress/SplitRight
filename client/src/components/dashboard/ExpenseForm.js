@@ -7,14 +7,13 @@ export default function ExpenseForm(props) {
 
 const router = useRouter()
 const {id} = router.query
+const [userData,setuserData] = useState(null)
 const dateFormat = 'YYYY/MM/DD'
 let now = dayjs()
 let defaultDate = dayjs(now.format(), dateFormat)
-const [userData,setuserData] = useState(null)
 
 useEffect(() => {
   if (id) {
-    console.log("this is expense",id)
     // Fetching user details
     const fetchUserDetails = async () => {
       try {
@@ -30,18 +29,26 @@ useEffect(() => {
   }
 }, []);
 
+let preFields = []//autofill the AntD form values
+if(userData){
+  const getVals = ['description','billAmount','paidBy']
+  for (const [key, value] of Object.entries(userData)) {
+    if(getVals.includes(key)){
+      preFields.push({"name":[key],"value":value})
+    } 
+  }
+  preFields.push({"name":['expensesDate'],"value":dayjs(userData.expensesDate, dateFormat)})
+}
 return (
     <div>
-      {JSON.stringify(userData)}
+      {/* {id ? JSON.stringify(userData): ""} */}
      <Form
       name="expense"
       wrapperCol={{
         span: 10,
       }}
-      initialValues={{
-        remember: true,
-        ["expensesDate"]: defaultDate
-      }}
+      initialValues={{["expensesDate"]: defaultDate}}
+      if preFields fields = {preFields}
       onFinish= {props.handleSubmit}
       autoComplete="off"
     >
@@ -60,8 +67,6 @@ return (
             <Input/>
             
           </Form.Item>
-          
-          
           <Form.Item
             label=""
             name="billAmount"
@@ -106,10 +111,11 @@ return (
             },
             ]}
         />
-        </Form.Item>
+          </Form.Item>
           <Form.Item name="expensesDate">
               <DatePicker format={dateFormat} defaultValue={defaultDate}/>
-            </Form.Item>
+              
+          </Form.Item>
           <Form.Item
             wrapperCol={{
               offset: 8,
