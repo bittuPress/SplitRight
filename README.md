@@ -34,14 +34,14 @@ Here is my ideal roadmap & features checklist for completing this project in a m
     - [X] Navigation bar
     - [X] Hero section 
     - [ ]  Main content area
-    - [ ] Sidebar
+    - [X] Sidebar
     - [X] Footer
 
 - [ ] II. Pages
     - [X] Homepage
     - [X] Login
     - [X] Register
-    - [ ] Bill Listing
+    - [X] Bill Listing
     - [ ] Groups
     - [ ] Expense and total financial graphs
      
@@ -51,7 +51,7 @@ Here is my ideal roadmap & features checklist for completing this project in a m
 - [ ] 
     - [X] User Register/Login
     - [X] Users create Expenses
-    - [ ] Can delete or modify the entries added by an individual
+    - [X] Can delete or modify the entries added by an individual
     - [ ] Involved users can also modify the entries
     - [ ] All action logs will be recorded
     - [ ] Users will see the financial status with their friends
