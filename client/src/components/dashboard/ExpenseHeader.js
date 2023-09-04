@@ -19,6 +19,7 @@ export default function ExpenseHeader(props) {
             method: 'POST',
             body: formData
         };
+        
         const res = await fetch('http://localhost:5000/add-expenses', requestOptions)
         const data = await res.json()
         if(data.success){

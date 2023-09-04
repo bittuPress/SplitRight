@@ -17,6 +17,6 @@ router.post('/add-expenses',upload.single('receiptImage'),expensesController.cre
 router.get('/expenses', expensesController.getUserExpenses)
 router.get('/get-expenses/:id', expensesController.getUserExpensesById)
 router.get('/expenses-img/:id', expensesController.getExpenseImgById)
-router.put('/expenses/edit/:id', expensesController.updateExpense)
+router.put('/expenses/edit/:id',upload.single('receiptImage'), expensesController.updateExpense)//update expense by id
 router.delete('/delete-expense/:id', expensesController.deleteExpense)
 module.exports=router;

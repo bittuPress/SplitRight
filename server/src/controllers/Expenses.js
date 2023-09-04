@@ -75,22 +75,17 @@ const getUserExpensesById = async(req,res) => {
 
 }
 const updateExpense = async (req, res) => {
-    // try {
-    //     //to check the current details of user
-    //     await usersModel.findByIdAndUpdate(req.params.id,{ $set: req.body })
-    //     const data = await usersModel.findById(req.params.id)
-    //     if (data) {
-    //         res.json({
-    //             msg: "User Details changed successfully",
-    //             success: true,
-    //             userDetails: data
-    //         })
-    //     }
-    // } catch (error) {
-    //     console.log(error)
-    // }
-
-
+    try {
+        const data = await expenseModel.findByIdAndUpdate(req.params.id,{ $set: req.body })
+        if (data) {
+            res.json({
+                msg: "Expense updated successfully",
+                success: true
+            })
+        }
+    } catch (error) {
+        console.log(error)
+    }
 }
 const deleteExpense = async (req, res) => {
     try {
